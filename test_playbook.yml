@@ -16,8 +16,8 @@
           <p>This is a custom html file created by ansible!</p>
           <body/>
           <html/>
-        owner: jarod.feitshans-a
-        group: jarod.feitshans-a
+        owner: jarod.feitshans
+        group: jarod.feitshans
         mode: 0644
 
     - name: Deploy Nxginx container
