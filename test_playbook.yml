@@ -1,5 +1,5 @@
 ---
-- name: Check Container status and print state
+- name: Deploy nginx container with custom html file
   hosts: localhost
   become: false
   vars:
