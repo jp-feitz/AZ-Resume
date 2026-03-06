@@ -1,0 +1,31 @@
+---
+- name: Deploy nginx container with custom html file
+  hosts: localhost
+  become: false
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
+  tasks:
+    - name: create custom html file for nginx container
+      ansible.builtin.copy:
+        dest: /home/jarod.feitshans/nginx/html/custom.html
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <body>
+          <h1>Welcome!</h1>
+          <p>This is a custom html file created by ansible!</p>
+          <body/>
+          <html/>
+        owner: jarod.feitshans
+        group: jarod.feitshans
+        mode: 0644
+
+    - name: Deploy Nxginx container
+      containers.podman.podman_container:
+        name: nginx
+        image: nginx
+        ports:
+         - 8081:80
+        volumes:
+          - /home/jarod.feitshans/nginx/html:/usr/share/nginx/html:Z
+        state: started
